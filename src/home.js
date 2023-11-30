@@ -1,7 +1,16 @@
 import React from 'react'
 import "./style.css"
+import { useLocation } from 'react-router-dom';
 
 function Home() {
+
+    const location = useLocation();
+    const searchParams = new URLSearchParams(location.search);
+
+    // Get the value of 'value' from the URL parameters
+    const value = searchParams.get('value');
+
+
     return (
         <div class="mainContainer">
             <div class="cardHolder">
@@ -63,7 +72,7 @@ function Home() {
                     <div class="infoheader vcenter">Total Amount</div>
                     <div class="infocontent val vcenter">$ 1,960</div>
                 </div>
-                <div class="button center">PAY</div>
+                <div class="button center">{value ? value : "PAY"}</div>
             </div>
         </div>
     )
