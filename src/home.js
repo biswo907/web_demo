@@ -10,6 +10,13 @@ function Home() {
     // Get the value of 'value' from the URL parameters
     const value = searchParams.get('value');
 
+    function goBackToReactNative() {
+        // Send a message back to React Native
+        if (window.ReactNativeWebView && window.ReactNativeWebView.postMessage) {
+            window.ReactNativeWebView.postMessage('goBack');
+        }
+    }
+
 
     return (
         <div class="mainContainer">
@@ -72,7 +79,7 @@ function Home() {
                     <div class="infoheader vcenter">Total Amount</div>
                     <div class="infocontent val vcenter">$ 1,960</div>
                 </div>
-                <div class="button center">{value ? value : "PAY"}</div>
+                <div onClick={goBackToReactNative} class="button center">{value ? value : "PAY"}</div>
             </div>
         </div>
     )
