@@ -64,9 +64,9 @@ function Home() {
 
     function goBackToReactNative() {
         // Send a message back to React Native
-        // if (window.ReactNativeWebView && window.ReactNativeWebView.postMessage) {
-        // window.ReactNativeWebView.postMessage('goBack');
-        // }
+        if (window.ReactNativeWebView && window.ReactNativeWebView.postMessage) {
+            window.ReactNativeWebView.postMessage('From react js');
+        }
     }
 
     const sendDataToWebView = () => {
@@ -148,7 +148,7 @@ function Home() {
 
                     <div class="purchase-info">
                         <input type="number" min="0" value="1" />
-                        <button type="button" class="btn" onClick={sendDataToWebView}>
+                        <button type="button" class="btn" onClick={goBackToReactNative}>
                             Add to Cart <i class="fas fa-shopping-cart"></i>
                         </button>
                         <button type="button" class="btn">Compare</button>
