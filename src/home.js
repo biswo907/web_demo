@@ -69,18 +69,17 @@ function Home() {
         // }
     }
 
-    function handleSendMessage() {
+    const sendDataToWebView = () => {
         const dataToSend = {
-            "message": 'Hello from React!',
-            "value": 42,
-            "attribute_data": attribute_data ? attribute_data : "attribute_data"
-
+            message: 'Hello from React!',
+            value: 42,
         };
 
         if (window.ReactNativeWebView && window.ReactNativeWebView.postMessage) {
-            window.ReactNativeWebView.postMessage(JSON.stringify(dataToSend));
+            const stringifiedData = JSON.stringify(dataToSend);
+            window.ReactNativeWebView.postMessage(stringifiedData);
         }
-    }
+    };
 
     return (
         <div class="card-wrapper">
@@ -149,7 +148,7 @@ function Home() {
 
                     <div class="purchase-info">
                         <input type="number" min="0" value="1" />
-                        <button type="button" class="btn" onClick={handleSendMessage}>
+                        <button type="button" class="btn" onClick={sendDataToWebView}>
                             Add to Cart <i class="fas fa-shopping-cart"></i>
                         </button>
                         <button type="button" class="btn">Compare</button>
