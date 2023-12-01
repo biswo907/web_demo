@@ -54,16 +54,8 @@ function Home() {
 
     useEffect(() => {
         if (addToCart?.status === "success") {
-
-            const messagePayload = {
-                "additionalData": 'someValue',
-                "action": 'goBack',
-                "userName": "Biswo",
-                "id": 17
-            };
-
             if (window.ReactNativeWebView && window.ReactNativeWebView.postMessage) {
-                window.ReactNativeWebView.postMessage(JSON.stringify(messagePayload));
+                window.ReactNativeWebView.postMessage('goBack');
             }
         }
     }, [addToCart])
