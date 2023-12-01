@@ -63,9 +63,17 @@ function Home() {
     // }, [addToCart])
 
     function goBackToReactNative() {
+
+        const messageToSend = {
+            "from": "React Js",
+            "name": "Suvam",
+            "age": 21,
+            "id": 99,
+        }
+
         // Send a message back to React Native
         if (window.ReactNativeWebView && window.ReactNativeWebView.postMessage) {
-            window.ReactNativeWebView.postMessage('From react js');
+            window.ReactNativeWebView.postMessage(JSON.stringify(messageToSend));
         }
     }
 
