@@ -23,50 +23,63 @@ function Home() {
 
     //   {"attribute_data": "Colors:Red,Sizes:12*15", "price": 649, "product_id": 22661, "total_quantity": 1, "user_id": 6439, "variation_id": 22681}
 
-    const separatedValues = attribute_data & attribute_data?.split(',')
+    // const separatedValues = attribute_data & attribute_data?.split(',')
 
-    const postdata =
-    {
-        "attribute_data": separatedValues ? separatedValues[0] : `Colors:Red`,
-        "Sizes": separatedValues ? separatedValues[1].split(':')[1] : `12*15`,
-        "price": price ? price : 649,
-        "product_id": product_id ? product_id : 22661,
-        "total_quantity": total_quantity ? total_quantity : 1,
-        "user_id": user_id ? user_id : 6439,
-        "variation_id": variation_id ? variation_id : 22681
-    }
+    // const postdata =
+    // {
+    //     "attribute_data": separatedValues ? separatedValues[0] : `Colors:Red`,
+    //     "Sizes": separatedValues ? separatedValues[1].split(':')[1] : `12*15`,
+    //     "price": price ? price : 649,
+    //     "product_id": product_id ? product_id : 22661,
+    //     "total_quantity": total_quantity ? total_quantity : 1,
+    //     "user_id": user_id ? user_id : 6439,
+    //     "variation_id": variation_id ? variation_id : 22681
+    // }
 
-    const handleCart = async () => {
-        try {
-            console.log("Add To Cart Called");
-            const { data } = await storeConfig.post(`/store/add/to/cart`, postdata, {
-                headers: {
-                    "Authorization": `Bearer ${token}`
-                }
-            })
-            console.log("Add To Cart Success", data);
-            setAddToCart(data)
+    // const handleCart = async () => {
+    //     try {
+    //         console.log("Add To Cart Called");
+    //         const { data } = await storeConfig.post(`/store/add/to/cart`, postdata, {
+    //             headers: {
+    //                 "Authorization": `Bearer ${token}`
+    //             }
+    //         })
+    //         console.log("Add To Cart Success", data);
+    //         setAddToCart(data)
 
-        } catch (error) {
-            console.log("Error", error);
-            console.log("Error", error?.response?.data?.message);
-        }
-    }
+    //     } catch (error) {
+    //         console.log("Error", error);
+    //         console.log("Error", error?.response?.data?.message);
+    //     }
+    // }
 
-    useEffect(() => {
-        if (addToCart?.status === "success") {
-            if (window.ReactNativeWebView && window.ReactNativeWebView.postMessage) {
-                window.ReactNativeWebView.postMessage('goBack');
-                setAddToCart("")
-            }
-        }
-    }, [addToCart])
+    // useEffect(() => {
+    //     if (addToCart?.status === "success") {
+    //         if (window.ReactNativeWebView && window.ReactNativeWebView.postMessage) {
+    //             window.ReactNativeWebView.postMessage('goBack');
+    //             setAddToCart("")
+    //         }
+    //     }
+    // }, [addToCart])
 
     function goBackToReactNative() {
         // Send a message back to React Native
         // if (window.ReactNativeWebView && window.ReactNativeWebView.postMessage) {
         // window.ReactNativeWebView.postMessage('goBack');
         // }
+    }
+
+    function handleSendMessage() {
+        const dataToSend = {
+            "message": 'Hello from React!',
+            "value": 42,
+            "attribute_data": attribute_data ? attribute_data : "attribute_data"
+
+        };
+
+        if (window.ReactNativeWebView && window.ReactNativeWebView.postMessage) {
+            window.ReactNativeWebView.postMessage(JSON.stringify(dataToSend));
+        }
     }
 
     return (
@@ -136,7 +149,7 @@ function Home() {
 
                     <div class="purchase-info">
                         <input type="number" min="0" value="1" />
-                        <button type="button" class="btn" onClick={handleCart}>
+                        <button type="button" class="btn" onClick={handleSendMessage}>
                             Add to Cart <i class="fas fa-shopping-cart"></i>
                         </button>
                         <button type="button" class="btn">Compare</button>
