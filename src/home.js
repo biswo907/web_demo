@@ -9,6 +9,13 @@ function Home() {
 
     // Get the value of 'value' from the URL parameters
     const value = searchParams.get('value');
+    const attribute_data = searchParams.get('attribute_data');
+    const price = searchParams.get('price');
+    const product_id = searchParams.get('product_id');
+    const total_quantity = searchParams.get('total_quantity');
+    const user_id = searchParams.get('user_id');
+    const variation_id = searchParams.get('variation_id');
+    const token = searchParams.get('token');
 
     function goBackToReactNative() {
         // Send a message back to React Native
@@ -54,6 +61,15 @@ function Home() {
                 Option : Credit/Debit Card
             </div>
             <h5 class="center">OTHER PAYMENT OPTIONS</h5>
+            <h5 class="center">{attribute_data ? attribute_data : "attribute_data"}</h5>
+            <h5 class="center">{price ? price : "price"}</h5>
+            <h5 class="center">{product_id ? product_id : "product_id"}</h5>
+            <h5 class="center">{total_quantity ? total_quantity : "total_quantity"}</h5>
+            <h5 class="center">{user_id ? user_id : "user_id"}</h5>
+            <h5 class="center">{variation_id ? variation_id : "variation_id"}</h5>
+            <p>{token ? token : "token"}</p>
+
+
             <div class="options vcenter">
                 <div class="opt">
                     <div class="icon center">
