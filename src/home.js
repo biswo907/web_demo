@@ -23,16 +23,17 @@ function Home() {
 
     //   {"attribute_data": "Colors:Red,Sizes:12*15", "price": 649, "product_id": 22661, "total_quantity": 1, "user_id": 6439, "variation_id": 22681}
 
+    const separatedValues = attribute_data & attribute_data?.split(',')
 
     const postdata =
     {
-        "attribute_data": `Colors:Red`,
-        "Sizes": `12*15`,
-        "price": 649,
-        "product_id": 22661,
-        "total_quantity": 1,
-        "user_id": 6439,
-        "variation_id": 22681
+        "attribute_data": separatedValues ? separatedValues[0] : `Colors:Red`,
+        "Sizes": separatedValues ? separatedValues[1].split(':')[1] : `12*15`,
+        "price": price ? price : 649,
+        "product_id": product_id ? product_id : 22661,
+        "total_quantity": total_quantity ? total_quantity : 1,
+        "user_id": user_id ? user_id : 6439,
+        "variation_id": variation_id ? variation_id : 22681
     }
 
     const handleCart = async () => {
