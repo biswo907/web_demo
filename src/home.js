@@ -56,8 +56,8 @@ function Home() {
         if (addToCart?.status === "success") {
 
             const messagePayload = {
-                "action": 'goBack',
                 "additionalData": 'someValue',
+                "action": 'goBack',
                 "userName": "Biswo",
                 "id": 17
             };
@@ -70,9 +70,9 @@ function Home() {
 
     function goBackToReactNative() {
         // Send a message back to React Native
-        if (window.ReactNativeWebView && window.ReactNativeWebView.postMessage) {
-            window.ReactNativeWebView.postMessage('goBack');
-        }
+        // if (window.ReactNativeWebView && window.ReactNativeWebView.postMessage) {
+        // window.ReactNativeWebView.postMessage('goBack');
+        // }
     }
 
     return (
