@@ -20,74 +20,61 @@ function Home() {
     const token = searchParams.get('token');
 
 
+    const postdata =
+    {
+        "attribute_data": `Colors:Red`,
+        "Sizes": `12*15`,
+        "price": 649,
+        "product_id": 22661,
+        "total_quantity": 1,
+        "user_id": 6439,
+        "variation_id": 22681
+    }
 
-    //   {"attribute_data": "Colors:Red,Sizes:12*15", "price": 649, "product_id": 22661, "total_quantity": 1, "user_id": 6439, "variation_id": 22681}
+    const handleCart = async () => {
+        try {
+            console.log("Add To Cart Called");
+            const { data } = await storeConfig.post(`/store/add/to/cart`, postdata, {
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            })
+            console.log("Add To Cart Success", data);
+            setAddToCart(data)
 
-    // const separatedValues = attribute_data & attribute_data?.split(',')
-
-    // const postdata =
-    // {
-    //     "attribute_data": separatedValues ? separatedValues[0] : `Colors:Red`,
-    //     "Sizes": separatedValues ? separatedValues[1].split(':')[1] : `12*15`,
-    //     "price": price ? price : 649,
-    //     "product_id": product_id ? product_id : 22661,
-    //     "total_quantity": total_quantity ? total_quantity : 1,
-    //     "user_id": user_id ? user_id : 6439,
-    //     "variation_id": variation_id ? variation_id : 22681
-    // }
-
-    // const handleCart = async () => {
-    //     try {
-    //         console.log("Add To Cart Called");
-    //         const { data } = await storeConfig.post(`/store/add/to/cart`, postdata, {
-    //             headers: {
-    //                 "Authorization": `Bearer ${token}`
-    //             }
-    //         })
-    //         console.log("Add To Cart Success", data);
-    //         setAddToCart(data)
-
-    //     } catch (error) {
-    //         console.log("Error", error);
-    //         console.log("Error", error?.response?.data?.message);
-    //     }
-    // }
-
-    // useEffect(() => {
-    //     if (addToCart?.status === "success") {
-    //         if (window.ReactNativeWebView && window.ReactNativeWebView.postMessage) {
-    //             window.ReactNativeWebView.postMessage('goBack');
-    //             setAddToCart("")
-    //         }
-    //     }
-    // }, [addToCart])
-
-    function goBackToReactNative() {
-
-        const messageToSend = {
-            "from": "React Js",
-            "name": "Suvam",
-            "age": 21,
-            "id": 99,
-        }
-
-        // Send a message back to React Native
-        if (window.ReactNativeWebView && window.ReactNativeWebView.postMessage) {
-            window.ReactNativeWebView.postMessage(JSON.stringify(messageToSend));
+        } catch (error) {
+            console.log("Error", error);
+            console.log("Error", error?.response?.data?.message);
         }
     }
 
-    const sendDataToWebView = () => {
-        const dataToSend = {
-            message: 'Hello from React!',
-            value: 42,
-        };
+    useEffect(() => {
+        if (addToCart?.status === "success") {
+            const messageToSend = {
+                "from": "React Js",
+                "name": "Suvam",
+                "age": 21,
+                "id": 99,
+            }
 
-        if (window.ReactNativeWebView && window.ReactNativeWebView.postMessage) {
-            const stringifiedData = JSON.stringify(dataToSend);
-            window.ReactNativeWebView.postMessage(stringifiedData);
+            // Send a message back to React Native
+            if (window.ReactNativeWebView && window.ReactNativeWebView.postMessage) {
+                window.ReactNativeWebView.postMessage(JSON.stringify(messageToSend));
+            }
         }
-    };
+    }, [addToCart])
+
+
+
+
+    function goBackToReactNative() {
+
+        handleCart()
+
+
+    }
+
+
 
     return (
         <div class="card-wrapper">
