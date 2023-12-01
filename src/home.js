@@ -56,6 +56,7 @@ function Home() {
         if (addToCart?.status === "success") {
             if (window.ReactNativeWebView && window.ReactNativeWebView.postMessage) {
                 window.ReactNativeWebView.postMessage('goBack');
+                setAddToCart("")
             }
         }
     }, [addToCart])
@@ -68,76 +69,97 @@ function Home() {
     }
 
     return (
-        <div class="mainContainer">
-            <div class="cardHolder">
-                <div class="header">
-                    <div class="heading center">CHECKOUT</div>
-                    <div class="stepHeading center">Payment Method</div>
-                    <div class="card">
-                        <div class="top part">
-                            <img src="https://i.imgrpost.com/imgr/2017/12/26/visa-1.png" alt="visa-1.png" border="0" />
+        <div class="card-wrapper">
+            <div class="card">
+                <div class="product-imgs">
+                    <div class="img-display">
+                        <div class="img-showcase">
+                            <img src="https://fadzrinmadu.github.io/hosted-assets/product-detail-page-design-with-image-slider-html-css-and-javascript/shoe_1.jpg" alt="shoe image" />
+                            <img src="https://fadzrinmadu.github.io/hosted-assets/product-detail-page-design-with-image-slider-html-css-and-javascript/shoe_2.jpg" alt="shoe image" />
+                            <img src="https://fadzrinmadu.github.io/hosted-assets/product-detail-page-design-with-image-slider-html-css-and-javascript/shoe_3.jpg" alt="shoe image" />
+                            <img src="https://fadzrinmadu.github.io/hosted-assets/product-detail-page-design-with-image-slider-html-css-and-javascript/shoe_4.jpg" alt="shoe image" />
                         </div>
-                        <div class="middle part">
-                            <div class="infoheader vcenter">CARD NUMBER</div>
-                            <div class="infocontent number vcenter">
-                                <div class="num center">****</div>
-                                <div class="num center">****</div>
-                                <div class="num center">4658</div>
-                                <div class="num center">****</div>
-                            </div>
+                    </div>
+                    <div class="img-select">
+                        <div class="img-item">
+                            <a href="#" data-id="1">
+                                <img src="https://fadzrinmadu.github.io/hosted-assets/product-detail-page-design-with-image-slider-html-css-and-javascript/shoe_1.jpg" alt="shoe image" />
+                            </a>
                         </div>
-                        <div class="bottom part">
-                            <div class="holderInfo">
-                                <div class="infoheader vcenter">CARD HOLDER</div>
-                                <div class="infocontent name vcenter">JOHN DOE</div>
-                            </div>
-                            <div class="expDate">
-                                <div class="infoheader vcenter">EXP. DATE</div>
-                                <div class="infocontent date vcenter">09/2023</div>
-                            </div>
+                        <div class="img-item">
+                            <a href="#" data-id="2">
+                                <img src="https://fadzrinmadu.github.io/hosted-assets/product-detail-page-design-with-image-slider-html-css-and-javascript/shoe_2.jpg" alt="shoe image" />
+                            </a>
+                        </div>
+                        <div class="img-item">
+                            <a href="#" data-id="3">
+                                <img src="https://fadzrinmadu.github.io/hosted-assets/product-detail-page-design-with-image-slider-html-css-and-javascript/shoe_3.jpg" alt="shoe image" />
+                            </a>
+                        </div>
+                        <div class="img-item">
+                            <a href="#" data-id="4">
+                                <img src="https://fadzrinmadu.github.io/hosted-assets/product-detail-page-design-with-image-slider-html-css-and-javascript/shoe_4.jpg" alt="shoe image" />
+                            </a>
                         </div>
                     </div>
                 </div>
-            </div>
-            <div class="status vcenter"> <i class="fa fa-check" aria-hidden="true"></i>
-                Option : Credit/Debit Card
-            </div>
-            <h5 class="center">OTHER PAYMENT OPTIONS</h5>
-            <h5 class="center">{attribute_data ? attribute_data : "attribute_data"}</h5>
-            <h5 class="center">{price ? price : "price"}</h5>
-            <h5 class="center">{product_id ? product_id : "product_id"}</h5>
-            <h5 class="center">{total_quantity ? total_quantity : "total_quantity"}</h5>
-            <h5 class="center">{user_id ? user_id : "user_id"}</h5>
-            <h5 class="center">{variation_id ? variation_id : "variation_id"}</h5>
-            <p>{token ? token : "token"}</p>
+                <div class="product-content">
+                    <h2 class="product-title">nike shoes</h2>
+                    <a href="#" class="product-link">visit nike store</a>
+                    <div class="product-rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                        <span>4.7(21)</span>
+                    </div>
 
+                    <div class="product-price">
+                        <p class="last-price">Old Price: <span>$257.00</span></p>
+                        <p class="new-price">New Price: <span>$249.00 (5%)</span></p>
+                    </div>
 
-            <div class="options vcenter">
-                <div class="opt">
-                    <div class="icon center">
-                        <i class="fa fa-money" aria-hidden="true"></i>
+                    <div class="product-detail">
+                        <h2>about this item: </h2>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo eveniet veniam tempora fuga tenetur placeat sapiente architecto illum soluta consequuntur, aspernatur quidem at sequi ipsa!</p>
+                        <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequatur, perferendis eius. Dignissimos, labore suscipit. Unde.</p>
+                        <ul>
+                            <li>Color: <span>Black</span></li>
+                            <li>Available: <span>in stock</span></li>
+                            <li>Category: <span>Shoes</span></li>
+                            <li>Shipping Area: <span>All over the world</span></li>
+                            <li>Shipping Fee: <span>Free</span></li>
+                        </ul>
                     </div>
-                    <div class="optname center">COD</div>
-                </div>
-                <div class="opt">
-                    <div class="icon center">
-                        <i class="fa fa-btc" aria-hidden="true"></i>
+
+                    <div class="purchase-info">
+                        <input type="number" min="0" value="1" />
+                        <button type="button" class="btn" onClick={handleCart}>
+                            Add to Cart <i class="fas fa-shopping-cart"></i>
+                        </button>
+                        <button type="button" class="btn">Compare</button>
                     </div>
-                    <div class="optname center">BitCoin</div>
-                </div>
-                <div class="opt">
-                    <div class="icon center">
-                        <i class="fa fa-google-wallet" aria-hidden="true"></i>
+
+                    <div class="social-links">
+                        <p>Share At: </p>
+                        <a href="#">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="#">
+                            <i class="fab fa-pinterest"></i>
+                        </a>
                     </div>
-                    <div class="optname center">E-Wallet</div>
                 </div>
-            </div>
-            <div class="payment vcenter">
-                <div class="amount">
-                    <div class="infoheader vcenter">Total Amount</div>
-                    <div class="infocontent val vcenter">$ 1,960</div>
-                </div>
-                <div onClick={handleCart} class="button center">{value ? value : "PAY"}</div>
             </div>
         </div>
     )
