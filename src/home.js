@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import "./style.css"
 import { useLocation } from 'react-router-dom';
+import storeConfig from './www/http';
 
 function Home() {
+    const [addToCart, setAddToCart] = useState()
 
     const location = useLocation();
     const searchParams = new URLSearchParams(location.search);
@@ -17,13 +19,53 @@ function Home() {
     const variation_id = searchParams.get('variation_id');
     const token = searchParams.get('token');
 
+
+
+    //   {"attribute_data": "Colors:Red,Sizes:12*15", "price": 649, "product_id": 22661, "total_quantity": 1, "user_id": 6439, "variation_id": 22681}
+
+
+    const postdata =
+    {
+        "attribute_data": `Colors:Red`,
+        "Sizes": `12*15`,
+        "price": 649,
+        "product_id": 22661,
+        "total_quantity": 1,
+        "user_id": 6439,
+        "variation_id": 22681
+    }
+
+    const handleCart = async () => {
+        try {
+            console.log("Add To Cart Called");
+            const { data } = await storeConfig.post(`/store/add/to/cart`, postdata, {
+                headers: {
+                    "Authorization": `Bearer ${token}`
+                }
+            })
+            console.log("Add To Cart Success", data);
+            setAddToCart(data)
+
+        } catch (error) {
+            console.log("Error", error);
+            console.log("Error", error?.response?.data?.message);
+        }
+    }
+
+    useEffect(() => {
+        if (addToCart?.status === "success") {
+            if (window.ReactNativeWebView && window.ReactNativeWebView.postMessage) {
+                window.ReactNativeWebView.postMessage('goBack');
+            }
+        }
+    }, [addToCart])
+
     function goBackToReactNative() {
         // Send a message back to React Native
         if (window.ReactNativeWebView && window.ReactNativeWebView.postMessage) {
             window.ReactNativeWebView.postMessage('goBack');
         }
     }
-
 
     return (
         <div class="mainContainer">
@@ -95,7 +137,7 @@ function Home() {
                     <div class="infoheader vcenter">Total Amount</div>
                     <div class="infocontent val vcenter">$ 1,960</div>
                 </div>
-                <div onClick={goBackToReactNative} class="button center">{value ? value : "PAY"}</div>
+                <div onClick={handleCart} class="button center">{value ? value : "PAY"}</div>
             </div>
         </div>
     )
