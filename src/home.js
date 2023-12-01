@@ -56,9 +56,10 @@ function Home() {
         if (addToCart?.status === "success") {
 
             const messagePayload = {
-                action: 'goBack',
-                additionalData: 'someValue',
-                "userName": "Biswo"
+                "action": 'goBack',
+                "additionalData": 'someValue',
+                "userName": "Biswo",
+                "id": 17
             };
 
             if (window.ReactNativeWebView && window.ReactNativeWebView.postMessage) {
