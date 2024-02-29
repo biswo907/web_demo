@@ -27,14 +27,13 @@ function Home() {
                         contact: '9999999999',
                     },
                     handler: function (response) {
-                        // Check if payment was successful
-                        if (response.razorpay_payment_id) {
-                            // Payment successful
-                            window.ReactNativeWebView.postMessage('paymentSuccess');
-                        } else {
-                            // Payment failed or cancelled
-                            window.ReactNativeWebView.postMessage('paymentFailed');
-                        }
+                        window.ReactNativeWebView.postMessage('paymentSuccess');
+
+                        // if (response.razorpay_payment_id) {
+                        //     window.ReactNativeWebView.postMessage('paymentSuccess');
+                        // } else {
+                        //     window.ReactNativeWebView.postMessage('paymentFailed');
+                        // }
                     },
                 });
 
