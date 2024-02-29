@@ -22,14 +22,12 @@ const RazorpayComponent = () => {
                     },
                     handler: function (response) {
                         // Send payment success message to parent window
-                        window.parent.postMessage('paymentSuccess', '*');
+                        window.ReactNativeWebView.postMessage('paymentSuccess');
                     },
                 });
 
-                // Open Razorpay checkout when button is clicked
-                document.getElementById('rzp-button').onclick = function () {
-                    rzp.open();
-                };
+                // Open Razorpay checkout immediately
+                rzp.open();
             };
         };
 
@@ -43,7 +41,7 @@ const RazorpayComponent = () => {
 
     return (
         <div>
-            <button id="rzp-button">Pay with Razorpay</button>
+            {/* No need for a button here */}
         </div>
     );
 };
