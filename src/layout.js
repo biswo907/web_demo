@@ -1,5 +1,6 @@
 import React from 'react'
 import { useLocation } from 'react-router-dom';
+import RazorpayComponent from './rajorpay';
 
 
 function Layout() {
@@ -18,9 +19,10 @@ function Layout() {
 
     return (
         <div>
-            <h1>{bookingId ? bookingId : "12"}</h1>
+            {/* <h1>{bookingId ? bookingId : "12"}</h1>
             <h1>{imageId ? imageId : "12....."}</h1>
-            <h1>{value}</h1>
+            <h1>{value}</h1> */}
+            <RazorpayComponent />
         </div>
     )
 }
