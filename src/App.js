@@ -1,16 +1,15 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import Layout from './layout';
 import Home from './home';
 
 function App() {
   return (
-    <BrowserRouter>
+    <HashRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/rajorpay" element={<Layout />}>
-        </Route>
+        <Route path="/rajorpay" element={<Layout />} />
       </Routes>
-    </BrowserRouter>
+    </HashRouter>
   );
 }
 
