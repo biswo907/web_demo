@@ -1,9 +1,11 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 
 function Layout() {
     const location = useLocation();
 
+    const [user, setUser] = useState('');
+    const [amount, setAmount] = useState('');
 
 
 
@@ -13,8 +15,11 @@ function Layout() {
             const company = urlParams.get('company');
             const user = urlParams.get('user');
             const amount = urlParams.get('amount');
-            const email = urlParams.get('amount');
-            const phone = urlParams.get('amount');
+            const email = urlParams.get('email');
+            const phone = urlParams.get('phone');
+
+            setUser(urlParams.get('email') || ''); // Setting user state
+            setAmount(urlParams.get('phone') || ''); // Setting amount state
 
 
             const script = document.createElement('script');
@@ -58,6 +63,8 @@ function Layout() {
     return (
         <div>
             {/* Your component JSX */}
+            <h1>{user}</h1>
+            <h1>{amount}</h1>
         </div>
     );
 }
