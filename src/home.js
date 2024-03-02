@@ -11,9 +11,11 @@ function Home() {
         const loadRazorpay = async () => {
             const urlParams = new URLSearchParams(window.location.search);
 
-            const company = urlParams.get('company');
-            const rajorpay = urlParams.get('rajorpay');
-            const userDetails = urlParams.get('userDetails');
+            const company_name = urlParams.get('company_name');
+            const rajorpay_id = urlParams.get('rajorpay_id');
+            const rajorpay_amount = urlParams.get('rajorpay_amount');
+            const user_email = urlParams.get('user_email');
+            const user_phone = urlParams.get('user_phone');
 
 
 
@@ -24,14 +26,14 @@ function Home() {
             script.onload = () => {
                 const rzp = new window.Razorpay({
                     key: 'rzp_test_NEFkyKlmiaaw6s',
-                    amount: rajorpay?.amount ? rajorpay?.amount : 120000,
+                    amount: rajorpay_amount ? rajorpay_amount : 120000,
                     currency: 'INR',
-                    name: company ? company : "Clickezy",
-                    order_id: rajorpay?.id, // Include the order ID
+                    name: company_name ? company_name : "Clickezy",
+                    order_id: rajorpay_id, // Include the order ID
                     description: 'Product or service description',
                     prefill: {
-                        email: userDetails?.email ? userDetails?.eamil : "gaurav.kumar@example.com",
-                        contact: userDetails?.phone ? userDetails?.phone : "9999999998",
+                        email: user_email ? user_email : "gaurav.kumar@example.com",
+                        contact: user_phone ? user_phone : "9999999998",
                     },
                     handler: function (response) {
                         // window.ReactNativeWebView.postMessage('paymentSuccess');
