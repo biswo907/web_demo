@@ -4,23 +4,17 @@ import { useLocation } from 'react-router-dom';
 function Home() {
     const location = useLocation();
 
-    function generateDemoOrderId() {
-        const timestamp = new Date().getTime();
-        const randomString = Math.random().toString(36).substring(7);
-        const orderId = `DEMO_ORDER_${timestamp}_${randomString}`;
-        return orderId;
-    }
+
 
 
     useEffect(() => {
         const loadRazorpay = async () => {
             const urlParams = new URLSearchParams(window.location.search);
+
             const company = urlParams.get('company');
-            const user = urlParams.get('user');
-            const amount = urlParams.get('amount');
-            const email = urlParams.get('amount');
-            const phone = urlParams.get('amount');
-            const demoOrderId = generateDemoOrderId();
+            const rajorpay = urlParams.get('rajorpay');
+            const userDetails = urlParams.get('userDetails');
+
 
 
             const script = document.createElement('script');
@@ -30,14 +24,14 @@ function Home() {
             script.onload = () => {
                 const rzp = new window.Razorpay({
                     key: 'rzp_test_NEFkyKlmiaaw6s',
-                    amount: amount ? amount : "30000",
+                    amount: rajorpay?.amount ? rajorpay?.amount : 120000,
                     currency: 'INR',
                     name: company ? company : "Clickezy",
-                    // order_id: demoOrderId, // Include the order ID
+                    order_id: rajorpay?.id, // Include the order ID
                     description: 'Product or service description',
                     prefill: {
-                        email: email ? email : "xyz@gmail.com",
-                        contact: phone ? phone : "9090909090",
+                        email: userDetails?.email ? userDetails?.eamil : "gaurav.kumar@example.com",
+                        contact: userDetails?.phone ? userDetails?.phone : "9999999998",
                     },
                     handler: function (response) {
                         // window.ReactNativeWebView.postMessage('paymentSuccess');
