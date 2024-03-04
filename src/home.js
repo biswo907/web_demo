@@ -79,7 +79,7 @@ function Home() {
             var options = {
                 // key: "rzp_test_NEFkyKlmiaaw6s", // Enter the Key ID generated from the Dashboard
                 // key: "rzp_test_nsM2fPe9xEtgGn", //@Akash_Bhai
-                key: "rzp_test_nsM2fPe9xEtgGn", //@Clickezy
+                key: "rzp_test_sD259Ct39v0khJ", //@Clickezy
                 name: company_name,
                 currency: "INR",
                 amount: rajorpay_amount,
