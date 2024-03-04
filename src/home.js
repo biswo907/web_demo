@@ -82,7 +82,7 @@ function Home() {
                 name: company_name,
                 currency: "INR",
                 amount: rajorpay_amount,
-                // order_id: rajorpay_id,
+                order_id: rajorpay_id,
                 handler: async function (res) {
                     await window.ReactNativeWebView.postMessage('paymentSuccess');
 
