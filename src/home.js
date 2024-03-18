@@ -90,9 +90,9 @@ function Home() {
                     console.log(res);
                 },
                 prefill: {
-                    name: 'Akash Pradhan',
-                    email: 'akash@gmail.com',
-                    contact: '7504587810',
+                    name: 'Biswajit Dash',
+                    email: 'itzbiswo@gmail.com',
+                    contact: '6370558953',
                 },
             };
             const paymentObject = new window.Razorpay(options);
