@@ -83,63 +83,6 @@ function Home() {
     }, [])
 
 
-    // useEffect(() => {
-    //     async function callRajorPay() {
-    //         const response = await initializeRazorpay()
-    //         if (!response) {
-    //             return true
-    //         }
-
-    //         const urlParams = new URLSearchParams(window.location.search);
-    //         const dataParam = urlParams.get('data');
-    //         const rajorpayDataParam = urlParams.get('rajorpay_data');
-
-    //         const company_name = urlParams.get('company_name');
-    //         const rajorpay_id = urlParams.get('rajorpay_id');
-    //         const rajorpay_amount = urlParams.get('rajorpay_amount');
-    //         const user_email = urlParams.get('user_email');
-    //         const user_phone = urlParams.get('user_phone');
-
-
-    // if (dataParam && rajorpayDataParam) {
-    //     try {
-    //         const parsedData = JSON.parse(dataParam);
-    //         const parsedRajorpayData = JSON.parse(rajorpayDataParam);
-    //         setPayloadData(parsedData);
-    //         setRajorpayData(parsedRajorpayData);
-    //     } catch (error) {
-    //         console.error('Error parsing data:', error);
-    //     }
-    // }
-
-
-    //         var options = {
-    //             key: "rzp_test_sD259Ct39v0khJ", //@Clickezy
-    //             name: company_name,
-    //             currency: "INR",
-    //             amount: rajorpay_amount,
-    //             order_id: rajorpay_id,
-    //             handler: async function (res) {
-    //                 await window.ReactNativeWebView.postMessage('paymentSuccess');
-
-    //                 console.log(res);
-    //             },
-    //             prefill: {
-    //                 name: 'Biswajit Dash',
-    //                 email: 'itzbiswo@gmail.com',
-    //                 contact: '6370558953',
-    //             },
-    //         };
-    //         const paymentObject = new window.Razorpay(options);
-    //         paymentObject.open();
-    //     }
-
-
-
-
-    //     callRajorPay()
-    // }, [])
-
     return (
         <div>
             {/* Your component JSX */}

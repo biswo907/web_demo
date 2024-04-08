@@ -1,13 +1,13 @@
 import { HashRouter, Routes, Route } from "react-router-dom";
-import Layout from './layout';
 import Home from './home';
+import { RajorpayPhotographer } from "./rajorpay_photographer";
 
 function App() {
   return (
     <HashRouter>
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/rajorpay" element={<Layout />} />
+        <Route path="/rajorpay" element={<RajorpayPhotographer />} />
       </Routes>
     </HashRouter>
   );
