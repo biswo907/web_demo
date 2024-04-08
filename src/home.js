@@ -1,63 +1,9 @@
-import React, { useEffect } from 'react';
-import { useLocation } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 import { initializeRazorpay } from './utils/rajorpay';
 
 function Home() {
-    const location = useLocation();
 
 
-
-
-    // useEffect(() => {
-    //     const loadRazorpay = async () => {
-    // const urlParams = new URLSearchParams(window.location.search);
-
-    // const company_name = urlParams.get('company_name');
-    // const rajorpay_id = urlParams.get('rajorpay_id');
-    // const rajorpay_amount = urlParams.get('rajorpay_amount');
-    // const user_email = urlParams.get('user_email');
-    // const user_phone = urlParams.get('user_phone');
-
-
-
-    //         const script = document.createElement('script');
-    //         script.src = 'https://checkout.razorpay.com/v1/checkout.js';
-    //         script.async = true;
-    //         document.body.appendChild(script);
-    //         script.onload = () => {
-    //             const rzp = new window.Razorpay({
-    //                 key: 'rzp_test_NEFkyKlmiaaw6s',
-    //                 amount: rajorpay_amount ? rajorpay_amount : 120000,
-    //                 currency: 'INR',
-    //                 name: company_name ? company_name : "Clickezy",
-    //                 order_id: rajorpay_id, // Include the order ID
-    //                 description: 'Product or service description',
-    //                 prefill: {
-    //                     email: user_email ? user_email : "gaurav.kumar@example.com",
-    //                     contact: user_phone ? user_phone : "9999999998",
-    //                     name: 'itz_biswo',
-    //                 },
-    //                 handler: function  (response) {
-    //                     // window.ReactNativeWebView.postMessage('paymentSuccess');
-
-    //                     if (response.razorpay_payment_id) {
-    //                         window.ReactNativeWebView.postMessage('paymentSuccess');
-    //                     } else {
-    //                         window.ReactNativeWebView.postMessage('paymentFailed');
-    //                     }
-    //                 },
-    //             });
-
-    //             rzp.open();
-    //         };
-    //     };
-
-    //     loadRazorpay();
-
-    //     return () => {
-    //         document.body.removeChild(document.querySelector('script[src="https://checkout.razorpay.com/v1/checkout.js"]'));
-    //     };
-    // }, [location.search]);
 
 
     useEffect(() => {
@@ -68,31 +14,62 @@ function Home() {
             }
 
             const urlParams = new URLSearchParams(window.location.search);
+            const payload_data = urlParams.get('payload');
+            const rajorpay_data = urlParams.get('rajorpay_data');
+            const authToken = urlParams.get('authToken');
+            // console.log('payload_data', JSON.parse(payload_data));
+            console.log('payload_data', JSON.parse(payload_data));
 
-            const company_name = urlParams.get('company_name');
-            const rajorpay_id = urlParams.get('rajorpay_id');
-            const rajorpay_amount = urlParams.get('rajorpay_amount');
-            const user_email = urlParams.get('user_email');
-            const user_phone = urlParams.get('user_phone');
+            const userDetails = JSON.parse(payload_data)
+
+            if (!payload_data && !rajorpay_data) {
+                return;
+            }
 
 
             var options = {
-                // key: "rzp_test_NEFkyKlmiaaw6s", // Enter the Key ID generated from the Dashboard
-                // key: "rzp_test_nsM2fPe9xEtgGn", //@Akash_Bhai
                 key: "rzp_test_sD259Ct39v0khJ", //@Clickezy
-                name: company_name,
-                currency: "INR",
-                amount: rajorpay_amount,
-                order_id: rajorpay_id,
+                name: "PairaLabs Private Limited",
+                currency: JSON.parse(rajorpay_data)?.currency,
+                amount: JSON.parse(rajorpay_data)?.amount,
+                order_id: JSON.parse(rajorpay_data)?.id,
                 handler: async function (res) {
-                    await window.ReactNativeWebView.postMessage('paymentSuccess');
+                    // await window.ReactNativeWebView.postMessage('paymentSuccess');
+                    console.log("cameeeeeeeeeeeeeeeee", JSON.parse(payload_data));
 
-                    console.log(res);
+                    const parsedData = JSON.parse(payload_data);
+
+
+                    const url = 'https://prepod.store.api.clickezy.in/api/v1/store/place/order'; // Assuming this is the correct endpoint
+                    const headers = {
+                        'Content-Type': 'application/json',
+                        'Authorization': `Bearer ${authToken}`
+                    };
+
+                    try {
+                        const response = await fetch(url, {
+                            method: 'POST',
+                            headers: headers,
+                            body: JSON.stringify(parsedData)
+                        });
+
+                        if (!response.ok) {
+                            console.log("RESPONSE NOT OK", response);
+                        }
+
+                        console.log("RESPONSE OK............", response);
+                        const data = await response.json();
+                        console.log('Data:', data);
+                        await window.ReactNativeWebView.postMessage('paymentSuccess');
+                    } catch (error) {
+                        console.error('Error:', error);
+                    }
+
                 },
                 prefill: {
-                    name: 'Biswajit Dash',
-                    email: 'itzbiswo@gmail.com',
-                    contact: '6370558953',
+                    name: JSON.parse(userDetails?.user_data)?.name,
+                    email: "example@gmail.com",
+                    contact: JSON.parse(userDetails?.user_data)?.phone,
                 },
             };
             const paymentObject = new window.Razorpay(options);
@@ -104,6 +81,64 @@ function Home() {
 
         callRajorPay()
     }, [])
+
+
+    // useEffect(() => {
+    //     async function callRajorPay() {
+    //         const response = await initializeRazorpay()
+    //         if (!response) {
+    //             return true
+    //         }
+
+    //         const urlParams = new URLSearchParams(window.location.search);
+    //         const dataParam = urlParams.get('data');
+    //         const rajorpayDataParam = urlParams.get('rajorpay_data');
+
+    //         const company_name = urlParams.get('company_name');
+    //         const rajorpay_id = urlParams.get('rajorpay_id');
+    //         const rajorpay_amount = urlParams.get('rajorpay_amount');
+    //         const user_email = urlParams.get('user_email');
+    //         const user_phone = urlParams.get('user_phone');
+
+
+    // if (dataParam && rajorpayDataParam) {
+    //     try {
+    //         const parsedData = JSON.parse(dataParam);
+    //         const parsedRajorpayData = JSON.parse(rajorpayDataParam);
+    //         setPayloadData(parsedData);
+    //         setRajorpayData(parsedRajorpayData);
+    //     } catch (error) {
+    //         console.error('Error parsing data:', error);
+    //     }
+    // }
+
+
+    //         var options = {
+    //             key: "rzp_test_sD259Ct39v0khJ", //@Clickezy
+    //             name: company_name,
+    //             currency: "INR",
+    //             amount: rajorpay_amount,
+    //             order_id: rajorpay_id,
+    //             handler: async function (res) {
+    //                 await window.ReactNativeWebView.postMessage('paymentSuccess');
+
+    //                 console.log(res);
+    //             },
+    //             prefill: {
+    //                 name: 'Biswajit Dash',
+    //                 email: 'itzbiswo@gmail.com',
+    //                 contact: '6370558953',
+    //             },
+    //         };
+    //         const paymentObject = new window.Razorpay(options);
+    //         paymentObject.open();
+    //     }
+
+
+
+
+    //     callRajorPay()
+    // }, [])
 
     return (
         <div>
